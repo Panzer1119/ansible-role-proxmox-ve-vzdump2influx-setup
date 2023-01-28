@@ -1,13 +1,22 @@
 ---
 add_hook_to_backup_job: true
 
-vzdump2influx_url: "https://raw.githubusercontent.com/moerphin/vzdump2influx/master/vzdump2influx.sh"
-vzdump2influx_script: "/usr/local/bin/vzdump2influx.sh"
+vzdump2influx_repository_url: "https://github.com/moerphin/vzdump2influx.git"
+vzdump2influx_repository_directory: "/tmp/vzdump2influx"
+vzdump2influx_version: "master"
+vzdump2influx_script_name: "vzdump2influx.sh"
+vzdump2influx_script_source: "{{ vzdump2influx_repository_directory }}/{{ vzdump2influx_script_name }}"
+vzdump2influx_install_directory: "/usr/local/bin"
+vzdump2influx_script_destination: "{{ vzdump2influx_install_directory }}/{{ vzdump2influx_script_name }}"
 
 debug: false
-speed: ""
+speed: '""'
 
 influxdb_protocol: HTTP
+influxdb_host:
 influxdb_port: 8086
+influxdb_token:
 influxdb_organization: "proxmox"
 influxdb_bucket: "proxmox-vzdump"
+
+location_code: ""
