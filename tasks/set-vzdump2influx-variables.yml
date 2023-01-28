@@ -1,55 +1,55 @@
 ---
 - name: "Set value for TOKEN in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'TOKEN=.*'
     replace: 'TOKEN={{ influxdb_token }}'
   no_log: true
 
 - name: "Set value for ORGANIZATION in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'ORGANIZATION=.*'
     replace: 'ORGANIZATION={{ influxdb_organization }}'
 
 - name: "Set value for LOCATIONCODE in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'LOCATIONCODE=.*'
     replace: 'LOCATIONCODE={{ location_code }}'
 
 - name: "Set value for PROTOCOL in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'PROTOCOL=.*'
     replace: 'PROTOCOL={{ influxdb_protocol }}'
 
 - name: "Set value for TOKEN in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'DBHOSTNAME=.*'
     replace: 'DBHOSTNAME={{ influxdb_host }}'
 
 - name: "Set value for PORT in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'PORT=.*'
     replace: 'PORT={{ influxdb_port }}'
 
 - name: "Set value for BUCKETNAME in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'BUCKETNAME=.*'
     replace: 'BUCKETNAME={{ influxdb_bucket }}'
 
 - name: "Set value for DEBUG in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     regexp: 'DEBUG=.*'
     replace: 'DEBUG={{ debug }}'
 
 - name: "Set value for SPEED in vzdump2influx script"
   replace:
-    path: "{{ vzdump2influx_script }}"
-    regexp: 'SPEED=.*'
+    path: "{{ vzdump2influx_script_source }}"
+    regexp: 'SPEED=""'
     replace: 'SPEED={{ speed }}'

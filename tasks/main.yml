@@ -1,26 +1,46 @@
 ---
-- name: "Ensure curl is installed"
+- name: "Ensure curl and git are installed"
   package:
-    name: "curl"
+    name: "{{ packages }}"
     state: "present"
+  vars:
+    packages:
+      - "curl"
+      - "git"
 
-- name: "Download vzdump2influx script"
-  get_url:
-    url: "{{ vzdump2influx_url }}"
-    dest: "{{ vzdump2influx_script }}"
+- block:
+    - name: "Clone vzdump2influx repository"
+      git:
+        repo: "{{ vzdump2influx_repository_url }}"
+        dest: "{{ vzdump2influx_repository_directory }}"
+        version: "{{ vzdump2influx_version }}"
+        update: true
+        force: false
+
+  rescue:
+    - name: "No update"
+      debug:
+        msg: "Repository has not been updated"
 
 - name: "Make vzdump2influx script executable"
   file:
-    path: "{{ vzdump2influx_script }}"
+    path: "{{ vzdump2influx_script_source }}"
     mode: "0755"
 
 - name: "Update vzdump2influx script with variables"
   include_tasks:
     file: "set-vzdump2influx-variables.yml"
 
+- name: "Copy file only if it differs"
+  copy:
+    src: "{{ vzdump2influx_script_source }}"
+    dest: "{{ vzdump2influx_script_destination }}"
+    remote_src: true
+    force: true
+
 - name: "Add hook to backup job"
   lineinfile:
     path: "/etc/vzdump.conf"
-    line: "script: {{ vzdump2influx_script }}"
+    line: "script: {{ vzdump2influx_script_destination }}"
     state: "present"
   when: "add_hook_to_backup_job"
