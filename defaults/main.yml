@@ -1,0 +1,9 @@
+---
+add_hook_to_backup_job: true
+
+vzdump2influx_url: "https://raw.githubusercontent.com/moerphin/vzdump2influx/master/vzdump2influx.sh"
+vzdump2influx_script: "/usr/local/bin/vzdump2influx.sh"
+
+influxdb_organization: "proxmox"
+influxdb_bucket: "proxmox-vzdump" #TODO Maybe create a separate bucket?
+#TODO Add more of the variables

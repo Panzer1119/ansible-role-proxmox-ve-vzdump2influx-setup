@@ -1,0 +1,60 @@
+---
+- name: "Ensure curl is installed"
+    package:
+      name: "curl"
+      state: "present"
+      
+- name: "Download vzdump2influx script"
+  get_url:
+    url: "{{ vzdump2influx_url }}"
+    dest: "{{ vzdump2influx_script }}"
+    
+- name: "Make vzdump2influx script executable"
+  file:
+    path: "{{ vzdump2influx_script }}"
+    mode: "0755"
+    
+- name: "Update vzdump2influx.sh with variables"
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'TOKEN=.*'
+      replace: 'TOKEN={{ TOKEN }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'ORGANIZATION=.*'
+      replace: 'ORGANIZATION={{ ORGANIZATION }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'LOCATIONCODE=.*'
+      replace: 'LOCATIONCODE={{ LOCATIONCODE }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'PROTOCOL=.*'
+      replace: 'PROTOCOL={{ PROTOCOL }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'DBHOSTNAME=.*'
+      replace: 'DBHOSTNAME={{ DBHOSTNAME }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'PORT=.*'
+      replace: 'PORT={{ PORT }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'BUCKETNAME=.*'
+      replace: 'BUCKETNAME={{ BUCKETNAME }}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'DEBUG=.*'
+      replace: 'DEBUG={{DEBUG}}'
+    replace:
+      path: "{{ vzdump2influx_script }}"
+      regexp: 'SPEED=.*'
+      replace: 'SPEED={{SPEED}}'
+      
+- name: "Add hook to backup job"
+    lineinfile:
+      path: "/etc/vzdump.conf"
+      line: "script: {{ vzdump2influx_script }}"
+      state: "present"
+  when: "add_hook_to_backup_job"
