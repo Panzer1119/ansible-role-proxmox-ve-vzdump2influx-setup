@@ -1,0 +1,54 @@
+---
+- name: "Set value for TOKEN in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'TOKEN=.*'
+    replace: 'TOKEN={{ influxdb_token }}'
+
+- name: "Set value for ORGANIZATION in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'ORGANIZATION=.*'
+    replace: 'ORGANIZATION={{ influxdb_organization }}'
+
+- name: "Set value for LOCATIONCODE in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'LOCATIONCODE=.*'
+    replace: 'LOCATIONCODE={{ location_code }}'
+
+- name: "Set value for PROTOCOL in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'PROTOCOL=.*'
+    replace: 'PROTOCOL={{ influxdb_protocol }}'
+
+- name: "Set value for TOKEN in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'DBHOSTNAME=.*'
+    replace: 'DBHOSTNAME={{ influxdb_host }}'
+
+- name: "Set value for PORT in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'PORT=.*'
+    replace: 'PORT={{ influxdb_port }}'
+
+- name: "Set value for BUCKETNAME in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'BUCKETNAME=.*'
+    replace: 'BUCKETNAME={{ influxdb_bucket }}'
+
+- name: "Set value for DEBUG in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'DEBUG=.*'
+    replace: 'DEBUG={{ debug }}'
+
+- name: "Set value for SPEED in vzdump2influx.sh"
+  replace:
+    path: "{{ vzdump2influx_script }}"
+    regexp: 'SPEED=.*'
+    replace: 'SPEED={{ speed }}'

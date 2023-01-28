@@ -1,2 +1,12 @@
 ---
-# vars file for vzdump2influx-setup
+debug:
+speed:
+
+influxdb_protocol:
+influxdb_host:
+influxdb_port:
+influxdb_token:
+influxdb_organization:
+influxdb_bucket:
+
+location_code: ""

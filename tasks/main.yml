@@ -1,2 +1,26 @@
 ---
-# tasks file for vzdump2influx-setup
+- name: "Ensure curl is installed"
+  package:
+    name: "curl"
+    state: "present"
+
+- name: "Download vzdump2influx script"
+  get_url:
+    url: "{{ vzdump2influx_url }}"
+    dest: "{{ vzdump2influx_script }}"
+
+- name: "Make vzdump2influx script executable"
+  file:
+    path: "{{ vzdump2influx_script }}"
+    mode: "0755"
+
+- name: "Update vzdump2influx.sh with variables"
+  include_tasks:
+    file: "set-vzdump2influx-variables.yml"
+
+- name: "Add hook to backup job"
+  lineinfile:
+    path: "/etc/vzdump.conf"
+    line: "script: {{ vzdump2influx_script }}"
+    state: "present"
+  when: "add_hook_to_backup_job"

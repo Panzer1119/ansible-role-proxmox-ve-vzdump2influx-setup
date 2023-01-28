@@ -1,2 +1,13 @@
 ---
-# defaults file for vzdump2influx-setup
+add_hook_to_backup_job: true
+
+vzdump2influx_url: "https://raw.githubusercontent.com/moerphin/vzdump2influx/master/vzdump2influx.sh"
+vzdump2influx_script: "/usr/local/bin/vzdump2influx.sh"
+
+debug: false
+speed: ""
+
+influxdb_protocol: HTTP
+influxdb_port: 8086
+influxdb_organization: "proxmox"
+influxdb_bucket: "proxmox-vzdump"
