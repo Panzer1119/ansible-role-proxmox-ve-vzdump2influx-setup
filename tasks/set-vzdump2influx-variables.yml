@@ -4,6 +4,7 @@
     path: "{{ vzdump2influx_script }}"
     regexp: 'TOKEN=.*'
     replace: 'TOKEN={{ influxdb_token }}'
+  no_log: true
 
 - name: "Set value for ORGANIZATION in vzdump2influx script"
   replace:
